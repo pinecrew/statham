@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "statham",
+    "statham_macro",
+    "examples/demo"
+]
