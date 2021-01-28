@@ -39,7 +39,7 @@ impl Json {
         Ok(())
     }
 
-    pub fn insert<K, V>(mut self, key: K, value: V) -> Self
+    pub fn item<K, V>(mut self, key: K, value: V) -> Self
     where
         K: Into<String>,
         V: Into<Primitive>,
@@ -48,14 +48,14 @@ impl Json {
         self
     }
 
-    pub fn insert_iter<K, V, I>(mut self, items: I) -> Self
+    pub fn items<K, V, I>(mut self, items: I) -> Self
     where
         K: Into<String>,
         V: Into<Primitive>,
         I: IntoIterator<Item = (K, V)>,
     {
         for (k, v) in items {
-            self = self.insert(k, v);
+            self = self.item(k, v);
         }
         self
     }

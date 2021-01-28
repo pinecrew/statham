@@ -87,3 +87,22 @@ impl From<io::Error> for JsonError {
         JsonError::Io(value)
     }
 }
+
+impl<T: Into<Primitive>> From<Option<T>> for Primitive {
+    fn from(value: Option<T>) -> Self {
+        match value {
+            Some(v) => v.into(),
+            None => Primitive::Null,
+        }
+    }
+}
+
+#[cfg(feature = "unstable")]
+impl<T, const N: usize> From<&[T; N]> for Primitive
+where
+    T: Into<Primitive> + Copy,
+{
+    fn from(value: &[T; N]) -> Self {
+        Primitive::Array(value.iter().map(|&x| x.into()).collect())
+    }
+}

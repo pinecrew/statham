@@ -1,7 +1,7 @@
 extern crate proc_macro;
 
-use std::str::FromStr;
 use proc_macro::*;
+use std::str::FromStr;
 
 #[proc_macro]
 pub fn json(_tokens: TokenStream) -> TokenStream {

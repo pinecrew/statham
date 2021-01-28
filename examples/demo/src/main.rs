@@ -1,19 +1,25 @@
-extern crate statham_macro;
 extern crate statham;
-use statham_macro::json;
+extern crate statham_macro;
 use statham::*;
+use statham_macro::json;
 
 fn main() {
     let mut a = Json::new()
-        .insert("a", Null)
-        .insert("b", 32)
-        .insert("c", 3.14)
-        .insert("d", vec![1, 2, 3, 4])
-        .insert("e", vec![3.14, 4.15, 5.16])
-        .insert("f", vec![from!("123"), from!(32)])
-        .insert("g", "Hello, world!")
-        .insert_iter(vec![("A1", 5), ("A2", 6)])
-        .insert_iter(vec![
+        .item("a", Null)
+        .item("b", 32)
+        // same as Null
+        .item("c", None::<i32>)
+        // auto unpack Option
+        .item("d", Some(3.14))
+        // vectors
+        .item("e", vec![1, 2, 3, 4])
+        .item("f", vec![3.14, 4.15, 5.16])
+        // slice support (enable unstable feature)
+        // .item("f", &[3.14, 4.15, 5.16])
+        .item("g", vec![from!("123"), from!(32)])
+        .item("h", "Hello, world!")
+        .items(vec![("A1", 5), ("A2", 6)])
+        .items(vec![
             ("v1", from!(vec![1, 2, 3])),
             ("v2", from!(32)),
             ("v3", from!("hello")),
@@ -25,10 +31,10 @@ fn main() {
         *value = from!("123");
     }
 
-    let b = Json::default().insert("a", a).insert("bool", true);
+    let b = Json::default().item("a", a).item("bool", true);
 
     // TODO
-    let c = json!{
+    let c = json! {
         "a": "hello",
         "b": 42,
         "c": 3.14,
