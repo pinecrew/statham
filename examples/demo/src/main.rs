@@ -8,7 +8,7 @@ fn main() {
         .item("a", Null)
         .item("b", 32)
         // same as Null
-        .item("c", None::<i32>)
+        .item("c", None)
         // auto unpack Option
         .item("d", Some(3.14))
         // vectors
@@ -16,14 +16,15 @@ fn main() {
         .item("f", vec![3.14, 4.15, 5.16])
         // slice support (enable unstable feature)
         // .item("f", &[3.14, 4.15, 5.16])
-        .item("g", vec![from!("123"), from!(32)])
+        // automatic primitive vector casting
+        .item("g", array!["123", 32])
         .item("h", "Hello, world!")
         .items(vec![("A1", 5), ("A2", 6)])
         .items(vec![
             ("v1", from!(vec![1, 2, 3])),
             ("v2", from!(32)),
             ("v3", from!("hello")),
-            ("v4", Null),
+            ("v4", None),
             ("v5", from!(true)),
         ]);
 

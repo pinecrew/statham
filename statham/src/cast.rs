@@ -11,6 +11,13 @@ macro_rules! from {
     };
 }
 
+#[macro_export]
+macro_rules! array {
+    ( $($t:expr), * ) => {
+        vec![$( Primitive::from($t), )*]
+    }
+}
+
 macro_rules! integers {
     ( $($t:tt),* ) => {
         $(
@@ -92,7 +99,7 @@ impl<T: Into<Primitive>> From<Option<T>> for Primitive {
     fn from(value: Option<T>) -> Self {
         match value {
             Some(v) => v.into(),
-            None => Primitive::Null,
+            None => Primitive::None,
         }
     }
 }

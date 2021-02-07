@@ -21,6 +21,7 @@ impl fmt::Display for Primitive {
             Primitive::Text(value) => write!(f, r#""{}""#, value),
             Primitive::Number(value) => write!(f, "{}", value),
             Primitive::Boolean(value) => write!(f, "{}", value),
+            Primitive::None => f.write_str("null"),
             Primitive::Null => f.write_str("null"),
         }
     }

@@ -16,7 +16,9 @@ pub enum Primitive {
     Text(String),
     Number(Value),
     Boolean(bool),
+    // Null and None --> null
     Null,
+    None,
 }
 
 #[derive(Default)]
