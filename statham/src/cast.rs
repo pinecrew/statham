@@ -104,7 +104,6 @@ impl<T: Into<Primitive>> From<Option<T>> for Primitive {
     }
 }
 
-#[cfg(feature = "unstable")]
 impl<T, const N: usize> From<&[T; N]> for Primitive
 where
     T: Into<Primitive> + Copy,
